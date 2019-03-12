@@ -1,0 +1,43 @@
+{
+  "name": "college-quiz-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "classnames": "^2.2.6",
+    "jwt-decode": "^2.2.0",
+    "rc-pagination": "^1.17.8",
+    "react": "^16.8.1",
+    "react-countdown-now": "^2.1.0",
+    "react-dom": "^16.8.1",
+    "react-helmet": "^5.2.0",
+    "react-redux": "^6.0.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.5",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "aws s3 sync build/ s3://uuquiz",
+    "postdeploy": "aws cloudfront create-invalidation --distribution-id EDKDT59SNGARQ --paths '/*' && rm -rf build"
+  },
+ 
+
+
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  
+
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

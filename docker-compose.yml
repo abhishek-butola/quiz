@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+
+  database:
+    container_name: quiz_db
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    networks: 
+      custom_net:
+        ipv4_address: 172.25.0.15
+    volumes:
+      - ./data/db:/data/db
+
+  server:
+    container_name: server
+    restart: always
+    build: ./server
+    expose: 
+     - 5000
+    ports:
+      - 5000:5000
+    depends_on :
+      - database
+    networks: 
+      custom_net:
+        ipv4_address: 172.25.0.12
+  
+
+  client: 
+    container_name: client
+    build: ./client
+    expose: 
+     - 80
+    ports:
+     - 80:80
+    networks: 
+      custom_net:
+        ipv4_address: 172.25.0.10
+
+
+networks:
+  custom_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.25.0.0/16
+        
