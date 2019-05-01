@@ -6,12 +6,17 @@ const cors = require('cors');
 const app = express();
 const path = require('path');
 
+
+
 const fs = require('fs')
+
+app.use(cors());
+
 const users = require('./routes/api/users');
 const test = require('./routes/api/test');
 const question = require('./routes/api/question');
 
-app.use(cors());
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
