@@ -34,6 +34,7 @@ class AddQuestion extends Component {
   };
 
   onSubmit = e => {
+    e.preventDefault();
     const question = {
       question: this.state.question,
       one: this.state.one,
@@ -45,7 +46,7 @@ class AddQuestion extends Component {
     axios
       .post('http://159.65.157.170:5000/api/question', question)
       .then(response => {
-        console.log(response.data);
+        this.props.history.push('/add');
       });
   };
   render() {
