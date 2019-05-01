@@ -128,6 +128,7 @@ router.get('/', (req, res) => {
 
 //Get all Question
 router.get('/all', (req, res) => {
+  var response = {};
   Question.find((err, result) => {
     if (err) {
       (response.error = true), (response.message = 'Error fetching data');
