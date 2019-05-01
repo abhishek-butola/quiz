@@ -46,7 +46,7 @@ class AddQuestion extends Component {
     axios
       .post('http://159.65.157.170:5000/api/question', question)
       .then(response => {
-        this.props.history.push('/add');
+        window.location.reload();
       });
   };
   render() {
