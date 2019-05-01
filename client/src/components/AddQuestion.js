@@ -43,7 +43,7 @@ class AddQuestion extends Component {
       answer: this.state.answer
     };
     axios
-      .post('http://172.25.0.12:5000/api/question', question)
+      .post('http://159.65.157.170:5000/api/question', question)
       .then(response => {
         console.log(response.data);
       });
