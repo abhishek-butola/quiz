@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/authActions';
 import { clearCurrentProfile } from '../actions/profileActions';
-import Spinner from './Spinner'
+import Spinner from './Spinner';
 
 class Dashboard extends Component {
   state = {
@@ -17,7 +17,7 @@ class Dashboard extends Component {
       this.props.history.push('/question');
     } else {
       axios
-        .get('http://172.25.0.12:5000/api/question/dashboard')
+        .get('http://159.65.157.170:5000/api/question/dashboard')
         .then(response => {
           this.setState({ api: response.data });
         });
@@ -38,7 +38,7 @@ class Dashboard extends Component {
   onDeleteHandler(id) {
     console.log(id);
     axios
-      .delete(`http://172.25.0.12:5000/api/question/dashboard/${id}`)
+      .delete(`http://159.65.157.170:5000/api/question/dashboard/${id}`)
       .then(result => {
         const update = this.state.api.filter(arr => id !== arr.id);
         this.setState({ api: update });
@@ -67,37 +67,41 @@ class Dashboard extends Component {
             </button>
           </div>
         </div>
-       {this.state.api.length>0?( <table className="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Score</th>
-              <th scope="col">Remove</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.api.map((user, index) => (
-              <tr key={index}>
-                <th scope="row">{index}</th>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                {user.score !== undefined ? (
-                  <td className="text-success">{user.score}</td>
-                ) : (
-                  <td>Not tested</td>
-                )}
-                <td onClick={() => this.onDeleteHandler(user.id)}>
-                  <i
-                    className="fas fa-trash text-alert point"
-                    style={{ color: '#c60000' }}
-                  />
-                </td>
+        {this.state.api.length > 0 ? (
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Score</th>
+                <th scope="col">Remove</th>
               </tr>
-            ))}
-          </tbody>
-        </table>):<Spinner />}
+            </thead>
+            <tbody>
+              {this.state.api.map((user, index) => (
+                <tr key={index}>
+                  <th scope="row">{index}</th>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  {user.score !== undefined ? (
+                    <td className="text-success">{user.score}</td>
+                  ) : (
+                    <td>Not tested</td>
+                  )}
+                  <td onClick={() => this.onDeleteHandler(user.id)}>
+                    <i
+                      className="fas fa-trash text-alert point"
+                      style={{ color: '#c60000' }}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <Spinner />
+        )}
       </div>
     );
   }
