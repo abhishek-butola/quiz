@@ -20,7 +20,7 @@ class Question extends Component {
   json = [];
   current = 1;
   totalQuestion = 0;
-  totalPage = 1;
+  totalPage = 5;
   currentTime = 0;
 
   handleLogoutClick = e => {
@@ -39,7 +39,7 @@ class Question extends Component {
     this.json = [];
     this.forceUpdate();
     axios
-      .get(`http://159.65.157.170:5000/api/question?pageNo=${current}`)
+      .get(`http://159.65.151.117:5000/api/question?pageNo=${current}`)
       .then(response => {
         this.json = response.data;
         this.current = current;
@@ -50,22 +50,22 @@ class Question extends Component {
 
   componentDidMount() {
     axios
-      .get('http://159.65.157.170:5000/api/question/all')
+      .get('http://159.65.151.117:5000/api/question/all')
       .then(response => {
         this.totalQuestion = response.data.length;
         let n = response.data.length;
 
-        if (n > 10) {
-          while (n >= 10) {
-            n = n / 10;
-          }
-          this.totalPage = parseInt(n + 1);
-        } else {
-          this.totalPage = 1;
-        }
+        // if (n > 10) {
+        //   while (n >= 10) {
+        //     n = n / 10;
+        //   }
+        //   this.totalPage = parseInt(n + 1);
+        // } else {
+        //   this.totalPage = 1;
+        // }
 
         axios
-          .get('http://159.65.157.170:5000/api/question?pageNo=1')
+          .get('http://159.65.151.117:5000/api/question?pageNo=1')
           .then(response => {
             this.json = response.data;
             this.currentTime = Date.now();
@@ -88,7 +88,7 @@ class Question extends Component {
     }
 
     axios
-      .post('http://159.65.157.170:5000/api/question/submit', { newArray })
+      .post('http://159.65.151.117:5000/api/question/submit', { newArray })
       .then(this.props.history.push('/submit'));
   };
 

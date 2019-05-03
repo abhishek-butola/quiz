@@ -44,7 +44,7 @@ class AddQuestion extends Component {
       answer: this.state.answer
     };
     axios
-      .post('http://159.65.157.170:5000/api/question', question)
+      .post('http://159.65.151.117:5000/api/question', question)
       .then(response => {
         window.location.reload();
       });

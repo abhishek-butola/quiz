@@ -17,7 +17,7 @@ class Dashboard extends Component {
       this.props.history.push('/question');
     } else {
       axios
-        .get('http://159.65.157.170:5000/api/question/dashboard')
+        .get('http://159.65.151.117:5000/api/question/dashboard')
         .then(response => {
           this.setState({ api: response.data });
         });
@@ -38,7 +38,7 @@ class Dashboard extends Component {
   onDeleteHandler(id) {
     console.log(id);
     axios
-      .delete(`http://159.65.157.170:5000/api/question/dashboard/${id}`)
+      .delete(`http://159.65.151.117:5000/api/question/dashboard/${id}`)
       .then(result => {
         const update = this.state.api.filter(arr => id !== arr.id);
         this.setState({ api: update });
